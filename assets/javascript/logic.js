@@ -116,7 +116,7 @@ database.ref("/chat/").on("child_added", function(snapshot) {
     console.log(chatEntry);
 
     $("#chat-input").append(chatEntry);	
-    $("#chat-input").scrollTop$("#chat-input");
+    $("#chat-input").scrollTop("#chat-input");
     
 });
 
@@ -130,15 +130,29 @@ $("#chat-send").on("click", function(event) {
         console.log(msg);
         
 		var chatKey = database.ref().child("/chat/").push().key;
-		database.ref("/chat/" + chatKey).set(msg);
+		    database.ref("/chat/" + chatKey).set(msg);
         
 });
 
-$("#playerPanel1").on("click", ".panelOption", function(event) { 
+$("#playerCard1").on("click", ".cardOption", function(event) { 
+        event.preventDefault();
 
     var choice = $(this).text();
         player1Choice = choice
+        console.log(player1Choice);
         database.ref().child("/players/player1/choice").set(choice);
         turn = 2;
-	    database.ref().child("/turn").set(2);
+        database.ref().child("/turn").set(2);
+        
+});
+
+$("#playerCard2").on("click", ".cardOption", function(event) { 
+        event.preventDefault();
+
+    var choice = $(this).text();
+        player2Choice = choice
+        console.log(player2Choice);
+        database.ref().child("/players/player2/choice").set(choice);               
+
+		
 });
