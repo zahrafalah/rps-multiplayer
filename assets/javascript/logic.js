@@ -153,6 +153,92 @@ $("#playerCard2").on("click", ".cardOption", function(event) {
         player2Choice = choice
         console.log(player2Choice);
         database.ref().child("/players/player2/choice").set(choice);               
-
-		
+        turn = 1;
+        database.ref().child("/turn").set(1);
+        compare();
 });
+
+database.ref("/outcome/").on("value", function(snapshot) {
+	$("#roundOutcome").html(snapshot.val());
+});
+
+// database.ref("/players/player2/choice").on("value", function(snapshot) 
+function compare() {
+
+    if (player1.choice === "Rock") {
+        if (player2.choice === "Rock") {
+            console.log("tie");             
+            
+			database.ref().child("/outcome/").set("Tie game!");
+			database.ref().child("/players/player1/tie").set(player1.tie + 1);
+			database.ref().child("/players/player2/tie").set(player2.tie + 1);
+        }
+        else if(player2.choice === "Paper") {
+            console.log("player2 wins");
+
+            database.ref().child("/outcome/").set("Paper wins!");
+			database.ref().child("/players/player1/loss").set(player1.loss + 1);
+			database.ref().child("/players/player2/win").set(player2.win + 1);
+        } 
+        else if(player2.choice === "Scissors") {
+            console.log("player1 wins"); 
+            
+			database.ref().child("/outcome/").set("Rock wins!");
+			database.ref().child("/players/player1/win").set(player1.win + 1);
+			database.ref().child("/players/player2/loss").set(player2.loss + 1);
+        }
+        
+        }
+
+
+    }
+     if (player1.choice === "Scissors") {
+
+		if (player2.choice === "Rock") {		
+            console.log("player2 wins");
+            
+            database.ref().child("/outcome/").set("Rock wins!");
+			database.ref().child("/players/player1/loss").set(player1.loss + 1);
+			database.ref().child("/players/player2/win").set(player2.win + 1);
+        } 
+        else if (player2.choice === "Paper") {		
+            console.log("player1 wins");            
+            
+			database.ref().child("/outcome/").set("Scissors win!");
+			database.ref().child("/players/player1/win").set(player1.win + 1);
+			database.ref().child("/players/player2/loss").set(player2.loss + 1);
+        } 
+        else if (player2.choice === "Scissors"){		
+            console.log("tie");
+            
+            database.ref().child("/outcome/").set("Tie game!");
+			database.ref().child("/players/player1/tie").set(player1.tie + 1);
+			database.ref().child("/players/player2/tie").set(player2.tie + 1);
+
+        }
+    }
+
+    else if (player1.choice === "Paper") {
+		if (player2.choice === "Rock") {
+			console.log("player1 wins");
+
+			database.ref().child("/outcome/").set("Paper wins!");
+			database.ref().child("/players/player1/win").set(player1.win + 1);
+			database.ref().child("/players/player2/loss").set(player2.loss + 1);
+		} else if (player2.choice === "Paper") {
+			console.log("tie");
+
+			database.ref().child("/outcome/").set("Tie game!");
+			database.ref().child("/players/player1/tie").set(player1.tie + 1);
+			database.ref().child("/players/player2/tie").set(player2.tie + 1);
+		} else {
+			console.log("scissors win");
+
+			database.ref().child("/outcome/").set("Scissors win!");
+			database.ref().child("/players/player1/loss").set(player1.loss + 1);
+			database.ref().child("/players/player2/win").set(player2.win + 1);
+		}
+
+};
+
+
