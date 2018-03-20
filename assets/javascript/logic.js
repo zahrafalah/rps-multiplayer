@@ -39,6 +39,8 @@ player2Name = $("#first-name").val().trim();
       console.log(event);
     event.preventDefault();
     
+    //adds user name to session storage
+    sessionStorage.name = $("#first-name").val().trim()
     
     if ( ($("#first-name").val().trim() !== "") && !(player1 && player2) ) {
         if (player1 === ""){
@@ -73,7 +75,7 @@ player2Name = $("#first-name").val().trim();
        
     }
 }
-    // $("#first-name").val("")
+    $("#first-name").val("")
 })
 
 
@@ -125,17 +127,23 @@ $("#chat-send").on("click", function(event) {
 	event.preventDefault();
 
 		var msg = yourPlayerName + ": " + $("#chat").val().trim();
-		// $("#chat-input").val("");
+		
 
         console.log(msg);
         
 		var chatKey = database.ref().child("/chat/").push().key;
-		    database.ref("/chat/" + chatKey).set(msg);
+            database.ref("/chat/" + chatKey).set(msg);
+            $("#chat-input").val("");
         
 });
 
+
+
 $("#playerCard1").on("click", ".cardOption", function(event) { 
-        event.preventDefault();
+    event.preventDefault();
+    if (sessionStorage.name === player1.name) {
+        console.log(sessionStorage.name)
+        
 
     var choice = $(this).text();
         player1Choice = choice
@@ -143,20 +151,27 @@ $("#playerCard1").on("click", ".cardOption", function(event) {
         database.ref().child("/players/player1/choice").set(choice);
         turn = 2;
         database.ref().child("/turn").set(2);
-        
+        // $("#waitingNotice").html("Waiting on " + player2Name + " to choose...");
+    }
 });
+
+
+
 
 $("#playerCard2").on("click", ".cardOption", function(event) { 
         event.preventDefault();
-
+        if (sessionStorage.name === player2.name) {
     var choice = $(this).text();
         player2Choice = choice
         console.log(player2Choice);
         database.ref().child("/players/player2/choice").set(choice);               
         turn = 1;
         database.ref().child("/turn").set(1);
+        // $("#waitingNotice").html("Waiting on " + player1Name + " to choose...");
         compare();
+        }
 });
+    
 
 database.ref("/outcome/").on("value", function(snapshot) {
 	$("#roundOutcome").html(snapshot.val());
@@ -180,7 +195,7 @@ function compare() {
 			database.ref().child("/players/player1/loss").set(player1.loss + 1);
 			database.ref().child("/players/player2/win").set(player2.win + 1);
         } 
-        else if(player2.choice === "Scissors") {
+        else {
             console.log("player1 wins"); 
             
 			database.ref().child("/outcome/").set("Rock wins!");
@@ -191,8 +206,8 @@ function compare() {
         }
 
 
-    }
-     if (player1.choice === "Scissors") {
+
+    if (player1.choice === "Scissors") {
 
 		if (player2.choice === "Rock") {		
             console.log("player2 wins");
@@ -208,7 +223,7 @@ function compare() {
 			database.ref().child("/players/player1/win").set(player1.win + 1);
 			database.ref().child("/players/player2/loss").set(player2.loss + 1);
         } 
-        else if (player2.choice === "Scissors"){		
+        else {		
             console.log("tie");
             
             database.ref().child("/outcome/").set("Tie game!");
@@ -218,7 +233,7 @@ function compare() {
         }
     }
 
-    else if (player1.choice === "Paper") {
+    if (player1.choice === "Paper") {
 		if (player2.choice === "Rock") {
 			console.log("player1 wins");
 
@@ -237,8 +252,13 @@ function compare() {
 			database.ref().child("/outcome/").set("Scissors win!");
 			database.ref().child("/players/player1/loss").set(player1.loss + 1);
 			database.ref().child("/players/player2/win").set(player2.win + 1);
-		}
+        }
+    }
 
 };
 
+database.ref().set(false)
 
+// database.ref("/players/").on("child_removed", function(snapshot) {
+
+// });

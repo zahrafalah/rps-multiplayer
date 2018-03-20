@@ -1,114 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    
-  
+    <link href="https://fonts.googleapis.com/css?family=Sedgwick+Ave+Display" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/style.css" />
+
+
 </head>
+
 <body>
 
     <div class="container">
         <div class="jumbotron jumbotron-fluid">
-                <div class="container">
+            <div class="container">
                 <h1 class="display-3">Rock,Paper,Scissors Game!</h1>
                 <p class="lead">Enter your name and get started.</p>
+            </div>
+
+            <div class="first">
+            <form class="form-inline">
+                <div class="form-group mx-sm-3 mb-2">
+                    <label for="first-name" class="sr-only">Name</label>
+                    <input type="name" class="form-control is-valid" id="first-name" placeholder="First Name">
+                </div>
+                <button type="submit" id="add-name" class="btn btn-success mb-2">submit</button>
+            </form>
+            </div>
+
+        </div>
+    </div>
+
+    <br>
+    <div class="container">
+
+
+
+        <div class="row">
+
+            <div class="card text-white bg-success mb-3" id="playerCard1" style="width: 18rem;">
+
+                <div class="card-header">
+                    <h3 class="panel-title text-center" id="playerOneName"></h3>
                 </div>
 
-                <form class="form-inline">
-                        <div class="form-group mx-sm-3 mb-2">
-                            <label for="first-name" class="sr-only">Name</label>
-                            <input type="name" class="form-control is-valid" id="first-name" placeholder="First Name">
-                        </div>
-                        <button type="submit" id="add-name" class="btn btn-success mb-2">submit</button>
-                </form>
+                <div class="card-body text-center">
+
+                    <div class="cardOption">
+                        <div class="option">Rock</div>
+                    </div>
+                    <br>
+                    <div class="cardOption">
+                        <div class="option">Paper</div>
+                    </div>
+                    <br>
+                    <div class="cardOption">
+                        <div class="option">Scissors</div>
+                    </div>
+                    <br>
+                    <div class="stats" id="player1Stats"></div>
+
+                </div>
+            </div>
+
+            <div class="card text-white bg-success mb-3" style="width: 18rem;">
+
+                <div class="card-body">
+                    <h3 class="text-center" id="waitingNotice"></h3>
+                    <h3 class="text-center" id="roundOutcome">Rock-Paper-Scissors</h3>
+                </div>
+
+            </div>
+
+            <div class="card text-white bg-success mb-3" id="playerCard2" style="width: 18rem;">
+
+                <div class="card-header">
+                    <h3 class="panel-title text-center" id="playerTwoName"></h3>
+                </div>
+
+                <div class="card-body text-center">
+
+                    <div class="cardOption">
+                        <div class="option">Rock</div>
+                    </div>
+                    <br>
+                    <div class="cardOption">
+                        <div class="option">Paper</div>
+                    </div>
+                    <br>
+                    <div class="cardOption">
+                        <div class="option">Scissors</div>
+                    </div>
+                    <br>
+                    <div class="stats" id="player2Stats"></div>
+
+                </div>
+            </div>
+
         </div>
 
-        
-        <br>
-        <div class="panel panel-success">
-            <div class="row">
-
-                <div class="card text-white bg-success mb-3" id="playerCard1" style="width: 18rem;">
-
-                    <div class="card-header">
-                        <h3 class="panel-title text-center" id="playerOneName"></h3>
-                    </div>
-
-                    <div class="card-body text-center">
-                      
-                        <div class= "cardOption"><div class="option">Rock</div></div> 
-                        <br>
-                        <div class= "cardOption"><div class="option">Paper</div></div> 
-                        <br>                    
-                        <div class= "cardOption"><div class="option">Scissors</div></div> 
-                        <br>                    
-                        <div class="stats" id="player1Stats"></div>
-
-                    </div>
-                </div>
-            
-                <div class="card text-white bg-success mb-3" style="width: 18rem;">   
-
-                    <div class="card-body">
-                        <h3 class="text-center" id="waitingNotice"></h3>
-                        <h3 class="text-center" id="roundOutcome">Rock-Paper-Scissors</h3>
-                    </div>
-
-                </div>
-
-                <div class="card text-white bg-success mb-3" id="playerCard2" style="width: 18rem;">
-
-                    <div class="card-header">
-                        <h3 class="panel-title text-center" id="playerTwoName"></h3>
-                    </div>
-
-                    <div class="card-body text-center">
-
-                        <div class= "cardOption"><div class="option">Rock</div></div> 
-                        <br>
-                        <div class= "cardOption"><div class="option">Paper</div></div> 
-                        <br>                    
-                        <div class= "cardOption"><div class="option">Scissors</div></div> 
-                        <br>                    
-                        <div class="stats" id="player2Stats"></div>
-
-                    </div>
-                </div>
-                        
+        <div class="row">
+            <div class="chat-style col-md-12">
+                <label for="subject"></label>
+                <div id="chat-input" name="subject" placeholder="" style="height:200px ; width: 720px" class="form-control is-valid"></div>
             </div>
             
+            <div class="scrollbar scrollbar-primary">
+                    <div class="force-overflow"></div>
+            </div>
+
             <div class="row">
-                <!-- <br> -->
-                        <label for="subject"></label>
-                        <div id="chat-input" name="subject" placeholder="" style="height:200px ; width: 720px" class="form-control is-valid"></div>
-                <!-- </br> -->
-                   
-                <form class="form-inline">
+
+                <div class="col-md-12 center-block">
+                    <form class="form-inline">
                         <div class="form-group mx-sm-3 mb-2">
                             <label for="chat" class="sr-only"></label>
                             <input type="text" class="form-control is-valid" style="width:720px" id="chat" placeholder="Chat here">
                         </div>
                         <button type="submit" id="chat-send" class="btn btn-success mb-2">submit</button>
-                </form>
-
-                
-
+                    </form>
+                </div>
             </div>
+
+
         </div>
-    </div>
 
-	
 
-    <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
-    <script type="text/javascript" src="./assets/javascript/logic.js"></script>
-    
+
+
+        <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
+        <script type="text/javascript" src="./assets/javascript/logic.js"></script>
+
 </body>
+
 </html>
