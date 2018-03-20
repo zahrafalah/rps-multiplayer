@@ -75,7 +75,7 @@ player2Name = $("#first-name").val().trim();
        
     }
 }
-    $("#first-name").val("")
+    // $("#first-name").val("")
 })
 
 
@@ -145,7 +145,7 @@ $("#playerCard1").on("click", ".cardOption", function(event) {
         console.log(sessionStorage.name)
         
 
-    var choice = $(this).text();
+    var choice = $(this).text().trim();
         player1Choice = choice
         console.log(player1Choice);
         database.ref().child("/players/player1/choice").set(choice);
@@ -161,7 +161,7 @@ $("#playerCard1").on("click", ".cardOption", function(event) {
 $("#playerCard2").on("click", ".cardOption", function(event) { 
         event.preventDefault();
         if (sessionStorage.name === player2.name) {
-    var choice = $(this).text();
+    var choice = $(this).text().trim();
         player2Choice = choice
         console.log(player2Choice);
         database.ref().child("/players/player2/choice").set(choice);               
