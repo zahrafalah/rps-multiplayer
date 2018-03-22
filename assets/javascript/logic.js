@@ -75,7 +75,7 @@ player2Name = $("#first-name").val().trim();
        
     }
 }
-    // $("#first-name").val("")
+    $("#first-name").val("")
 })
 
 
